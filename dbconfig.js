@@ -1,6 +1,12 @@
-const mong = require('mongoose')
-mong.connect('mongodb+srv://mahmoudmetawea464:123456789mA@cluster0.tqckopm.mongodb.net/project 0?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-).then(()=>{
-    console.log("connected")
+const mongoose=require('mongoose')
+mongoose.set('toJSON',{getters:true})
+try {
+    mongoose.set('strictQuery', false)
+    mongoose.connect(process.env.DB_HOST,{useNewUrlParser:true,useUnifiedTopology:true,autoIndex:true}). then( async() => {
+    console.log("Mongoose")
+
 })
+    
+} catch (error) {
+    console.log(error.message)
+}

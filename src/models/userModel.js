@@ -4,7 +4,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: {
+  namea: {
     type: String,
     required: [true, 'Please tell us your name!']
   },
@@ -17,13 +17,11 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
+    default: 'default.jpg'
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
+    enum: ['user',"doctor",'admin'],
     default: 'user'
   },
   password: {
@@ -114,6 +112,6 @@ userSchema.methods.createPasswordResetToken = function() {
   return resetToken;
 };
 
-const User = mongoose.model('User', userSchema);
+const Uservalidtion = mongoose.model('Uservalidtion', userSchema);
 
-module.exports = User;
+module.exports = Uservalidtion;
