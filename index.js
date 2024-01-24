@@ -46,6 +46,6 @@ throw new ErrorHandling(400,"aaaaaaaaaaaaaaaaaa")
 
 app.use(errorhandeler)
 
-app.listen(22,()=>{
+app.listen(20,()=>{
     console.log("donnnnnnn")
 })
