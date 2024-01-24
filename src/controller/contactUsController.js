@@ -19,8 +19,9 @@ exports.createContactMessage = async (req, res) => {
 // @access  Public
 exports.getContactMessages = async (req, res) => {
   try {
-    const contactMessages = await ContactUs.find();
-    res.status(200).json({ success: true, data: contactMessages });
+    const contactMessages = await ContactUs.countDocuments();
+    console.log(contactMessages)
+    res.status(200).json({ success: true, data: contactMessages,meta:{total:contactMessages.length} });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

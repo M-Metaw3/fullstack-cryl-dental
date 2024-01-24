@@ -10,11 +10,23 @@ import {
   Link,
   outlet
 } from "react-router-dom";
+import { ChakraProvider } from '@chakra-ui/react'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient()
+
 root.render(
   <React.StrictMode>
+  
 
     <App />
+
   
   </React.StrictMode>
 );
