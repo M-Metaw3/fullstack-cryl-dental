@@ -119,7 +119,7 @@ console.log(path.join(__dirname, 'src/images'));
 
 // app.use(
 //   cors({
-//     origin: 'https://detais-clinc-583axq64z-m-metaw3s-projects.vercel.app'
+//     origin: 'http://localhost:3111/blogs'
 //   })
 // );
 // app.use(cors())

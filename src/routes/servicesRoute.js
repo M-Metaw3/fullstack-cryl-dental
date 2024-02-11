@@ -18,7 +18,7 @@ const router = express.Router();
 
 
 router.post('/',services.uploadProductImages,services.resizeProductImages,services.createServices);
-router.patch('/:id',services.uploadProductImages,services.resizeProductImages,services.updateOne);
+router.put('/:id',services.uploadProductImages,services.resizeProductImages,services.updateOne);
 
 router.get('/',services.getallservices);
 router.delete('/:id',services.deleteOne);
