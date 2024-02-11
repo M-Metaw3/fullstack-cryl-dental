@@ -2,9 +2,15 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const { string } = require('joi');
+const { type } = require('os');
 
 const userSchema = new mongoose.Schema({
-  namea: {
+  name: {
+    type: String,
+    required: [true, 'Please tell us your name!']
+  },
+  clinic: {
     type: String,
     required: [true, 'Please tell us your name!']
   },
@@ -15,13 +21,10 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
-  phone: {
-    type: String,
-    default: 'default.jpg'
-  },
+  photo: String,
   role: {
     type: String,
-    enum: ['user',"doctor",'admin'],
+    enum: ['user', 'doctor','admin'],
     default: 'user'
   },
   password: {
@@ -30,6 +33,24 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     select: false
   },
+  // phoneNumber: {
+  //   type: String,
+  //   // required: [true, 'Please provide a PhoneNumber'],
+  //   // minlength: 8,
+  //   // select: false
+  // },
+  country: {
+    type: String,
+    // required: [true, 'Please provide a PhoneNumber'],
+    // minlength: 8,
+    // select: false
+  },
+  phone: {
+    type: String,
+    required: true,
+    // Other validation options can be added here
+  },
+  
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password'],
@@ -41,8 +62,15 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!'
     }
   },
+  EmailVerify:{
+type:Boolean,
+default:false
+  },
+
+  
   passwordChangedAt: Date,
   passwordResetToken: String,
+
   passwordResetExpires: Date,
   active: {
     type: Boolean,
@@ -105,13 +133,13 @@ userSchema.methods.createPasswordResetToken = function() {
     .update(resetToken)
     .digest('hex');
 
-  // console.log({ resetToken }, this.passwordResetToken);
+  console.log({ resetToken }, this.passwordResetToken);
 
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  this.passwordResetExpires = Date.now() + 30 * 60 * 1000;
 
   return resetToken;
 };
 
-const Uservalidtion = mongoose.model('Uservalidtion', userSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = Uservalidtion;
+module.exports = User;

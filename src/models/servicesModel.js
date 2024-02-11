@@ -9,21 +9,11 @@ const Serviceschema = new mongoose.Schema(
         required: [true, 'A Services must have a name'],
         unique: true,
         trim: true,
-        maxlength: [40, 'A Services name must have less or equal then 40 characters'],
-        minlength: [10, 'A Services name must have more or equal then 10 characters']
+        // maxlength: [40, 'A Services name must have less or equal then 40 characters'],
+        // minlength: [10, 'A Services name must have more or equal then 10 characters']
       },
 
-      ratingsAverage: {
-        type: Number,
-        default: 4.5,
-        min: [1, 'Rating must be above 1.0'],
-        max: [5, 'Rating must be below 5.0'],
-        set: val => Math.round(val * 10) / 10 // 4.666666, 46.6666, 47, 4.7
-      },
-      ratingsQuantity: {
-        type: Number,
-        default: 0
-      },
+
       price: {
         type: Number,
         required: [true, 'A Services must have a price']
@@ -38,6 +28,7 @@ const Serviceschema = new mongoose.Schema(
           message: 'Discount price ({VALUE}) should be below regular price'
         }
       },
+      
       description: {
         type: String,
         trim: true
@@ -50,8 +41,23 @@ const Serviceschema = new mongoose.Schema(
       createdAt: {
         type: Date,
         default: Date.now(),
-        select: false
+        // select: false
       },
+      
+    //   priceAfterDiscount: {
+    //   type: Number,
+    //   // Set the value based on the price and priceDiscount fields
+    //   set: function () {
+    //     if (this.price && this.priceDiscount) {
+    //       return this.price - this.priceDiscount;
+    //     }
+    //   },
+    //   // Exclude the field from the JSON representation
+    //   toJSON: { virtuals: true },
+    //   // Exclude the field from the object representation
+    //   toObject: { virtuals: true }
+    // },
+      
 
     },
     {

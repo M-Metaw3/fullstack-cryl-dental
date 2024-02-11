@@ -3,33 +3,24 @@ const blog = require('../controller/blogsController');
 const multer = require('multer');
 const path =require('path');
 const fs = require('fs');
+const auth = require('../controller/authController');
 
 
 
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'../images'))
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
- 
-  },
-}
-);
-
-var upload = multer({ storage: storage }).single('image');
 
 
 
-router.post('/addblog', upload
-,blog.postblog);
 
-// router.post('/comment/:id',auth.isUser, blog.comment);
-// router.get('/', blog.getblog);
-// router.get('/:id', blog.getoneblog);
 
-// router.delete('/:id',auth.isAdmin, blog.deleteplog);
+router.post('/',blog.uploadBannerImage,blog.resizeBannerImage,blog.createBlog);
+router.get('/',blog.getallBlog);
+router.delete('/:id',blog.deleteone);
+router.put('/:id',blog.edit);
+
+
+
+
 
 
 module.exports = router;

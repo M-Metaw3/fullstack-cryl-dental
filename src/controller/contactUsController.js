@@ -20,8 +20,10 @@ exports.createContactMessage = async (req, res) => {
 exports.getContactMessages = async (req, res) => {
   try {
     const contactMessages = await ContactUs.countDocuments();
+    const contactMessagess = await ContactUs.find();
+
     console.log(contactMessages)
-    res.status(200).json({ success: true, data: contactMessages,meta:{total:contactMessages.length} });
+    res.status(200).json({ success: true, data: contactMessagess,meta:{total:contactMessages.length} });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
@@ -39,5 +41,21 @@ exports.deleteContactMessage = async (req, res) => {
     res.status(204).json({ success: true, data: null });
   } catch (err) {
     res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+exports.deleteAll = async (req, res) => {
+  console.log('done')
+  try {
+    const deletedContacts = await ContactUs.deleteMany();
+  console.log(deletedContacts)
+    
+    if (deletedContacts.deletedCount === 0) {
+      return res.status(404).json({ success: false, error: 'No contact messages found' });
+    }
+
+    res.status(204).json({ success: true, data: null });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 };

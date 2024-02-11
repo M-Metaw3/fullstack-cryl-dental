@@ -1,7 +1,7 @@
 const factory = require('../Factory/Factory');
 const {uploadSingleImage} = require("../utils/imageUpload");
 const asyncHandler = require('./../utils/catchAsync');
-const {Blog} = require('../models/blogsModule');
+const HomePage = require('../models/HomeModel');
 const sharp = require('sharp');
 const path = require('path');
 
@@ -15,7 +15,7 @@ exports.uploadBannerImage = uploadSingleImage("images");
 
 // 2) PROCESSING(Sharp)
  exports.resizeBannerImage = asyncHandler(async (req, res, next) => {
-    console.log(req.file)
+    
   if (!req.file) return next();
   // console.log(req.file);
 
@@ -28,23 +28,23 @@ exports.uploadBannerImage = uploadSingleImage("images");
     .jpeg({quality: 100})
     .toFile(
     
-    path.join(__dirname,`../images/Blogs/${filename}`)
+    path.join(__dirname,`../images/HomePage/${filename}`)
     
     );
     console.log(req.file)
 
   // put it in req.body to access it when we access createBanner ,updateSingleBanner to save the filename into database
   req.body.images = filename;
-  req.body.path = path.join(__dirname,`../images/Blogs/${filename}`);
+  req.body.path = path.join(__dirname,`../images/HomePage/${filename}`);
 
   next();
 });
 
-
-exports.createBlog = factory.createOne(Blog);
-exports.getallBlog= factory.getAll(Blog);
-exports.deleteone= factory.deleteOne(Blog);
-exports.edit= factory.updateOne(Blog);
-
+  exports.createOne = factory.createOne(HomePage);
+  exports.getall = factory.getAll(HomePage);
+  exports.deleteone = factory.deleteOne(HomePage);
+  exports.updateone = factory.updateOne(HomePage);
 
 
+
+  

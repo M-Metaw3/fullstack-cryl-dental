@@ -1,32 +1,34 @@
 const express = require('express');
-const multer = require('multer');
-const {
-  createService,
-  getServices,
-  getService,
-  updateService,
-  deleteService,
-} = require('../controller/servicesController');
+// const multer = require('multer');
+const services = require('../controller/sericesController');
 
 const router = express.Router();
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,'../public'))
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, path.join(__dirname,'../public'))
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
    
-    },
-  }
-  );
+//     },
+//   }
+//   );
   
-  var upload = multer({ storage: storage }).single('image');
+//   var upload = multer({ storage: storage }).single('image');
 
 
-router.post('/',upload,createService);
-router.get('/services', getServices);
-router.get('/services/:id', getService);
-router.put('/services/:id', updateService);
-router.delete('/services/:id', deleteService);
+router.post('/',services.uploadProductImages,services.resizeProductImages,services.createServices);
+router.patch('/:id',services.uploadProductImages,services.resizeProductImages,services.updateOne);
+
+router.get('/',services.getallservices);
+router.delete('/:id',services.deleteOne);
+router.get('/:id',services.getone);
+
+
+
+// router.get('/services', getServices);
+// router.get('/services/:id', getService);
+// router.put('/services/:id', updateService);
+// router.delete('/services/:id', deleteService);
 
 module.exports = router;
