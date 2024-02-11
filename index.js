@@ -116,18 +116,18 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'src/images')));
 console.log(path.join(__dirname, 'src/images'));
 
+
 // app.use(
 //   cors({
-//     origin: {'https://detais-clinc-583axq64z-m-metaw3s-projects.vercel.app'}
+//     origin: 'https://detais-clinc-583axq64z-m-metaw3s-projects.vercel.app'
 //   })
 // );
+// app.use(cors())
 app.use(
   cors({
-    origin: 'https://detais-clinc-583axq64z-m-metaw3s-projects.vercel.app'
+    origin: 'https://detais-clinc.vercel.app'
   })
 );
-// app.use(cors())
-
 app.get('/', (req, res) => {
   res.send('metawea');
 });
