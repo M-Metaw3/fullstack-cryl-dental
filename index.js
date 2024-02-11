@@ -22,7 +22,7 @@ const app = express()
 
 app.use(express.json({ limit: '10kb' }));
 // app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(cors());
+// app.use(cors());
 
 
 
@@ -83,7 +83,7 @@ throw new ErrorHandling(400,"aaaaaaaaaaaaaaaaaa")
 })
 
 app.use(errorhandeler)
-const PORT =process.env.PORT || 3000
+const PORT =process.env.PORT || 3111
 app.listen(PORT,()=>{
     console.log("donnnnnnn")
 })
