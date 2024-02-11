@@ -14,7 +14,7 @@ const aboutRouting = require('./src/routes/Aboutus')
 const path = require('path');
 const Home = require('./src/routes/HomeRoute')
 
-const Visitor = require('../fullstack-cryl-dental/src/models/Vistormode')
+// const Visitor = require('../fullstack-cryl-dental/src/models/Vistormode')
 
 require('./dbconfig')
 
