@@ -83,7 +83,7 @@ throw new ErrorHandling(400,"aaaaaaaaaaaaaaaaaa")
 })
 
 app.use(errorhandeler)
-
-app.listen(3111,()=>{
+const PORT =process.env.PORT || 3111
+app.listen(PORT,()=>{
     console.log("donnnnnnn")
 })
