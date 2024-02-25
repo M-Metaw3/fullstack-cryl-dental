@@ -122,12 +122,12 @@ console.log(path.join(__dirname, 'src/images'));
 //     origin: 'http://localhost:3111/blogs'
 //   })
 // );
-// app.use(cors())
-app.use(
-  cors({
-    origin: 'https://detais-clinc.vercel.app'
-  })
-);
+app.use(cors())
+// app.use(
+//   cors({
+//     origin: 'https://detais-clinc.vercel.app'
+//   })
+// );
 app.get('/', (req, res) => {
   res.send('metawea');
 });
@@ -145,7 +145,7 @@ app.all('*', (req, res, next) => {
 
 app.use(errorhandler);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('Server is running on port', PORT);
+// const PORT = process.env.PORT || 3000;
+app.listen(3111, () => {
+  console.log('Server is running on port', 3111);
 });
