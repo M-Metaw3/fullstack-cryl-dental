@@ -55,39 +55,38 @@ exports.signup = catchAsync(async (req, res, next) => {
   await newUser.save()
 
 
-  const resetToken = newUser.createPasswordResetToken();
-  await newUser.save({ validateBeforeSave: false });
+  // const resetToken = newUser.createPasswordResetToken();
+  // await newUser.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
-  const resetURL = `http://localhost:3000/${resetToken}`;
+  // const resetURL = `http://localhost:3000/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}
-  `;
+  // const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}
+  // `;
 
   try {
-    await sendEmail({
-      email: newUser.email,
-      subject: 'Your verification link (valid for 30 min)',
-      message
-    });
-console.log("hi") 
     res.status(201).json({
       status: 'success',
       message: 'success registration verify your account',
       data: {
         newUser,
       }
+    // await sendEmail({
+    //   email: newUser.email,
+    //   subject: 'Your verification link (valid for 30 min)',
+    //   message
+    // });
       
     });
   } catch (err) {
     newUser.passwordResetToken = undefined;
     newUser.passwordResetExpires = undefined;
-    await newUser.save({ validateBeforeSave: false });
+    // await newUser.save({ validateBeforeSave: false });
 
-    return next(
-      new AppError('There was an error sending the email. Try again later!'),
-      500
-    );
+    // return next(
+    //   new AppError('There was an error sending the email. Try again later!'),
+    //   500
+    // );
   }
 
 
@@ -114,9 +113,9 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
-  if (!user.EmailVerify) {
-    return next(new AppError('please verify your email check your email and verifiy it ', 401));
-  }
+  // if (!user.EmailVerify) {
+  //   return next(new AppError('please verify your email check your email and verifiy it ', 401));
+  // }
 
   // 3) If everything ok, send token to client
   createSendToken(user, 200, req, res);
