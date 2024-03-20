@@ -116,7 +116,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'src/images')));
 console.log(path.join(__dirname, 'src/images'));
 
-
+app.use(express.static(path.join(__dirname, './Detais-Clinic/build')));
 // app.use(
 //   cors({
 //     origin: 'http://localhost:3111/blogs'
@@ -128,9 +128,12 @@ app.use(cors())
 //     origin: 'https://detais-clinc.vercel.app'
 //   })
 // );
-app.get('/', (req, res) => {
-  res.send('metawea');
+app.get('/', async(req, res) => {
+  // res.sendFile(path.join(__dirname, './Detais-Clinic/build', 'index.html'));
+  await res.sendFile(path.resolve('./Detais-Clinic/build/index.html'))
+
 });
+
 
 app.use('/users', userRouter);
 app.use('/service', servicesroute);
