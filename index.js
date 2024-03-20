@@ -116,7 +116,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'src/images')));
 console.log(path.join(__dirname, 'src/images'));
 
-app.use(express.static(path.join(__dirname, './Detais-Clinic/build')));
+app.use(express.static(path.join(__dirname, './src/build')));
 // app.use(
 //   cors({
 //     origin: 'http://localhost:3111/blogs'
@@ -130,7 +130,7 @@ app.use(cors())
 // );
 app.get('/', async(req, res) => {
   // res.sendFile(path.join(__dirname, './Detais-Clinic/build', 'index.html'));
-  await res.sendFile(path.resolve('./Detais-Clinic/build/index.html'))
+  await res.sendFile(path.resolve('./src/build/index.html'))
 
 });
 
