@@ -105,7 +105,7 @@ const blogsRouting = require('./src/routes/blogsRoute');
 const aboutRouting = require('./src/routes/Aboutus');
 const path = require('path');
 const Home = require('./src/routes/HomeRoute');
-
+const bodyParser = require('body-parser');
 require('./dbconfig');
 
 const app = express();
