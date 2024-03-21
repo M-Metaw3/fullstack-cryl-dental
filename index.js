@@ -110,7 +110,8 @@ require('./dbconfig');
 
 const app = express();
 
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '1mb' }));
+
 app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'src/images')));
