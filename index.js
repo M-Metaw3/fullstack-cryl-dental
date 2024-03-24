@@ -118,9 +118,8 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'src/images')));
 console.log(path.join(__dirname, 'src/images'));
 
-app.use(express.static(path.join(__dirname, './src/build')));
 // app.use(
-//   cors({
+  //   cors({
 //     origin: 'http://localhost:3111/blogs'
 //   })
 // );
@@ -130,20 +129,21 @@ app.use(cors())
 //     origin: 'https://detais-clinc.vercel.app'
 //   })
 // );
-app.get('/', async(req, res) => {
-  // res.sendFile(path.join(__dirname, './Detais-Clinic/build', 'index.html'));
+
+
+
+app.use('/api/users', userRouter);
+app.use('/api/service', servicesroute);
+app.use('/api/Home', Home);
+app.use('/api/contactus', contactUs);
+app.use('/api/blogs', blogsRouting);
+app.use('/api/about', aboutRouting);
+// res.sendFile(path.join(__dirname, './Detais-Clinic/build', 'index.html'));
+app.use(express.static(path.join(__dirname, './src/build')));
+app.get('/*', async(req, res) => {
   await res.sendFile(path.resolve('./src/build/index.html'))
-
+  
 });
-
-
-app.use('/users', userRouter);
-app.use('/service', servicesroute);
-app.use('/Home', Home);
-app.use('/contactus', contactUs);
-app.use('/blogs', blogsRouting);
-app.use('/about', aboutRouting);
-
 app.all('*', (req, res, next) => {
   throw new ErrorHandling(400, 'aaaaaaaaaaaaaaaaaa');
 });
